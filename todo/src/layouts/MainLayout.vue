@@ -1,23 +1,36 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header >
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
+        <q-btn
+           flat
+           dense
+           round
+           @click="leftDrawerOpen =!leftDrawerOpen"
+           icon="menu" 
+           aria-label="Menu" 
+           />
       </q-toolbar>
+
       <div class="q-px-lg q-pt-lg q-mb-lg">
         <div class="text-h3">Todo</div>
         <div class="subtitle1">{{ toDaysDate }}</div>
       </div>
-      <q-img src="../assets/mountain.jpg" class="header-image absolute-top" />
+
+      <!-- <q-img src="../assets/mountain.jpg" 
+      class="absolute-top header-image" />  -->
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above :width="250" :breakpoint="600">
+    <q-drawer
+     v-model="leftDrawerOpen"
+        show-if-above
+        :width="250"
+        :breakpoint="600">
       <q-scroll-area
         style="
           height: calc(100% - 150px);
           margin-top: 150px;
-          border-right: 1px solid #ddd;
-        "
+          border-right: 1px solid #ddd;"
       >
         <q-list padding>
           <q-item to="/" clickable v-ripple exact>
@@ -60,68 +73,17 @@
 <script>
 import { date } from "quasar";
 
-const linksList = [
-  {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
-  },
-  {
-    title: "Github",
-    caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework",
-  },
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
-  },
-];
 
-import { defineComponent, ref } from "vue";
 
-export default defineComponent({
+import {  ref } from "vue";
+
+export default {
   name: "MainLayout",
-
-  components: {},
-
-  setup() {
-    const leftDrawerOpen = ref(false);
-
+  data(){
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
+      leftDrawerOpen : false,
+    }
+
   },
 
   computed: {
@@ -130,7 +92,7 @@ export default defineComponent({
       return date.formatDate(timeStamp, "ddd D MMM ");
     },
   },
-});
+};
 </script>
 
 <style lang="scss">
